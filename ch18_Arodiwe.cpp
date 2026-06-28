@@ -223,7 +223,21 @@ int linearSearch(int arr[], int size, int target)
 //   Inner loop: walks through the unsorted portion comparing neighbors
 void bubbleSort(int arr[], int size)
 {
-    // TODO: implement bubble sort here
+     // Outer loop controls the number of passes
+    for (int i = 0; i < size - 1; i++)
+    {
+        // Inner loop walks the unsorted portion, shrinking each pass
+        for (int j = 0; j < size - 1 - i; j++)
+        {
+            // Swap if the element on the left is greater than the one on the right
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 
 }
 
@@ -240,7 +254,28 @@ void bubbleSort(int arr[], int size)
 //   After inner loop: swap arr[outer] with arr[minIndex]
 void selectionSort(int arr[], int size)
 {
-    // TODO: implement selection sort here
+     // Outer loop moves the boundary between sorted and unsorted portions
+    for (int i = 0; i < size - 1; i++)
+    {
+        int minIndex = i; // Assume the first unsorted element is the minimum
+        
+        // Inner loop searches for the actual minimum in the remaining array
+        for (int j = i + 1; j < size; j++)
+        {
+            if (arr[j] < arr[minIndex])
+            {
+                minIndex = j; // Found a smaller element, update index
+            }
+        }
+        
+        // Swap the found minimum element with the first unsorted element
+        if (minIndex != i)
+        {
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
 
 }
 
@@ -259,7 +294,21 @@ void selectionSort(int arr[], int size)
 //   Place key in the gap that was created
 void insertionSort(int arr[], int size)
 {
-    // TODO: implement insertion sort here
+    // Outer loop starts at index 1 because index 0 is trivially sorted
+    for (int i = 1; i < size; i++)
+    {
+        int key = arr[i]; // The element we want to insert
+        int j = i - 1;
+        
+        // Shift elements of arr[0..i-1] that are greater than key to one position ahead
+        while (j >= 0 && arr[j] > key)
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        // Place key into its correct sorted spot
+        arr[j + 1] = key;
+    }
 
 }
 
@@ -395,7 +444,29 @@ void mergeSort(int arr[], int left, int right)
 //   Each iteration: mid = (low + high) / 2
 int binarySearch(int arr[], int size, int target)
 {
-    // TODO: implement binary search here
+     int low = 0;
+    int high = size - 1;
+    
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2; // Prevents potential integer overflow
+        
+        // Check if target is present at mid
+        if (arr[mid] == target)
+        {
+            return mid; // Target found, return its index
+        }
+        // If target is smaller, ignore right half
+        else if (arr[mid] > target)
+        {
+            high = mid - 1;
+        }
+        // If target is larger, ignore left half
+        else
+        {
+            low = mid + 1;
+        }
+    }
 
     return -1;  // not found (keep this as your default return)
 }
