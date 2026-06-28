@@ -1,7 +1,7 @@
 // ============================================================
 // COSC 1437 - Chapter 18: Searching and Sorting Algorithms
-// Name:
-// Date:
+// Name: Ezeanyinabia Arodiwe
+// Date: June 27, 2026
 // ============================================================
 
 #include <iostream>
